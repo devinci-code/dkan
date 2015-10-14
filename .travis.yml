@@ -8,6 +8,11 @@ sudo: false
 php:
   - 5.5
 
+addons:
+  artifacts: true
+     debug: true
+     paths:
+       - ./tests/assets/
 mysql:
   database: dkan_travis
   username: root
