@@ -8,6 +8,8 @@ default:
           - Drupal\DrupalExtension\Context\MessageContext
           - Drupal\DrupalExtension\Context\DrushContext
           - Drupal\DKANExtension\Context\GroupContext
+          - Drupal\DKANExtension\Context\DatasetContext
+          - Drupal\DKANExtension\Context\PageContext
           - Devinci\DevinciExtension\Context\DebugContext:
               asset_dump_path: %paths.base%/../assets/
           - Devinci\DevinciExtension\Context\JavascriptContext:
