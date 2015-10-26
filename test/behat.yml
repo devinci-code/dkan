@@ -9,7 +9,11 @@ default:
           - Drupal\DrupalExtension\Context\DrushContext
           - Drupal\DKANExtension\Context\GroupContext
           - Drupal\DKANExtension\Context\DatasetContext
+          - Drupal\DKANExtension\Context\ResourceContext
           - Drupal\DKANExtension\Context\PageContext
+          - Drupal\DKANExtension\Context\DKANDataStoryContext
+          - Drupal\DKANExtension\Context\DataDashboardContext
+          - Drupal\DKANExtension\Context\ChartContext
           - Devinci\DevinciExtension\Context\DebugContext:
               asset_dump_path: %paths.base%/../assets/
           - Devinci\DevinciExtension\Context\JavascriptContext:
