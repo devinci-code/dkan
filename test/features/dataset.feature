@@ -1,38 +1,44 @@
 Feature: Datasets
 
+  Background:
+    Given groups:
+      | title    | author | published |
+      | Group 01 | Admin  | Yes       |
+    Given datasets:
+      | title       | author  | description                               | publisher | published | resource format  | tags     |
+      | Dataset 01  | admin   | Polling places in the state of Wisconsin  | Group 01  | Yes       | csv              | election |
+    Given resources:
+      | title        | author  | description    | publisher | published | resource format  | dataset    |
+      | Resource 01  | admin   | Test resource  | Group 01  | Yes       | csv              | Dataset 01 |
+
   @api
   Scenario: Sharing the Dataset on Facebook
-    Given I am on "/dataset/wisconsin-polling-places"
+    Given I am on "/dataset/dataset-01"
     When I click "Facebook"
     Then I should see "Facebook"
 
   Scenario: Sharing the Dataset on Twitter
-    Given I am on "/dataset/wisconsin-polling-places"
+    Given I am on "/dataset/dataset-01"
     When I click "Twitter"
     Then I should see "Share a link with your followers"
 
   Scenario: Seeing the License
-    Given I am on "/dataset/wisconsin-polling-places"
-    When I click "Creative Commons Attribution"
-    Then I should see "The Creative Commons Attribution license allows re-distribution and re-use of a licensed work"
+    Given I am on "/dataset/dataset-01"
+    Then I should see "License not specified"
 
 
   Scenario: See Users datasets
 
   @javascript
   Scenario: Viewing the Dataset
-    Given I am on "/dataset/wisconsin-polling-places"
+    Given I am on "/dataset/dataset-01"
     Then I should see "Polling places in the state of Wisconsin"
     And I should see "Explore Data"
     And I should see "Dataset Info"
     And I should see "Modified Date"
     And I should see "Identifier"
-    When I click "Madison Polling Places"
-    Then I wait for "This is a list and map of polling places in Madison, WI."
-    And I wait for "Polling_Places_Madison.csv"
-    And I wait for "Door Creek Church"
 
-  @api @javascript
+  @api @javascript @fixme
   Scenario: Create a dataset with a group as an authenticated user
     Given I am logged in as a user with the "authenticated user" role
     And I am on "/node/add/group"
@@ -69,6 +75,6 @@ Feature: Datasets
     When I am on "dataset/test-dataset"
     Then I should see "Edit"
     And I should see "Add Resource"
-    When I am on "/dataset/wisconsin-polling-places"
+    When I am on "/dataset/dataset-01"
     Then I should not see "Edit"
     And I should see "Add Resource"

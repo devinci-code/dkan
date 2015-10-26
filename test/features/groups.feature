@@ -3,35 +3,47 @@ Feature: Groups
   As a website user
   I need to be able to view the group pages
 
+  Background:
+    Given groups:
+      | title    | author | published |
+      | Group 01 | Admin  | Yes       |
+    Given datasets:
+      | title       | author  | description                               | publisher | published | resource format  | tags     |
+      | Dataset 01  | admin   | Polling places in the state of Wisconsin  | Group 01  | Yes       | csv              | election |
+      | Dataset 02  | admin   | Afghanistan election districts            | Group 01  | Yes       | csv              | election |
+    Given resources:
+      | title        | author  | description    | publisher | published | resource format  | dataset    |
+      | Resource 01  | admin   | Test resource  | Group 01  | Yes       | csv              | Dataset 01 |
+  
   @api @javascript
   Scenario: Join a group and edit group content as an Authenticated User
     Given I am logged in as a user with the "authenticated user" role
-    When I visit "dataset/wisconsin-polling-places"
+    When I visit "dataset/dataset-01"
     Then I should not see "edit"
-    When I click "Madison Polling Places"
+    When I click "Resource 01"
     Then I should not see "edit"
-    Given I am a "member" of the group "Geospatial Data Explorer Examples"
-    When I visit "dataset/wisconsin-polling-places"
+    Given I am a "member" of the group "Group 01"
+    When I visit "dataset/dataset-01"
     Then I should see "edit"
 
   @api @javascript
   Scenario: Request to join a group as an Auth User
     Given I am logged in as a user with the "authenticated user" role
-    When I visit "group/geospatial-data-explorer-examples"
+    When I visit "group/group-01"
     And I click "Request group membership"
-    Then I should see "Are you sure you want to join the group Geospatial Data Explorer Examples?"
+    Then I should see "Are you sure you want to join the group Group 01?"
 
   @api @javascript
   Scenario: View Groups
-    Given I am on "/group/geospatial-data-explorer-examples"
-    Then I should see "Wisconsin Polling Places"
-    And I should see "Afghanistan Election Districts"
+    Given I am on "/group/group-01"
+    Then I should see "Dataset 01"
+    And I should see "Dataset 02"
     When I click "country-afghanistan (1)"
-    Then I should see "Afghanistan Election Districts"
-    And I should not see "Wisconsin Polling Places"
+    Then I should see "Dataset 02"
+    And I should not see "Dataset 01"
     When I click "country-afghanistan"
-    Then I should see "Afghanistan Election Districts"
-    And I should see "Wisconsin Polling Places"
+    Then I should see "Dataset 02"
+    And I should see "Dataset 01"
 
   @api @javascript
   Scenario: Manage a group as an Editor
