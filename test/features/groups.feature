@@ -10,7 +10,7 @@ Feature: Groups
     Given datasets:
       | title       | author  | description                               | publisher | published | resource format  | tags     |
       | Dataset 01  | admin   | Polling places in the state of Wisconsin  | Group 01  | Yes       | csv              | election |
-      | Dataset 02  | admin   | Afghanistan election districts            | Group 01  | Yes       | csv              | election |
+      | Dataset 02  | admin   | Afghanistan election districts            | Group 01  | Yes       | csv              | country-afghanistan |
     Given resources:
       | title        | author  | description    | publisher | published | resource format  | dataset    |
       | Resource 01  | admin   | Test resource  | Group 01  | Yes       | csv              | Dataset 01 |
